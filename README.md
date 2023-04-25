@@ -10,6 +10,12 @@
 
 </div>
 
+## Ссылки на проект
+
+IP 130.193.36.249
+
+API https://api.sateon.nomoredomains.monster
+
 ## Запуск проекта
 
 `npm run start` — запускает сервер  
