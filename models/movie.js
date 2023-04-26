@@ -36,7 +36,7 @@ const movieSchema = new mongoose.Schema({
       validator: isUrl,
     },
   },
-  thubnail: {
+  thumbnail: {
     type: String,
     required: true,
     validate: {
@@ -52,11 +52,11 @@ const movieSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  nameRu: {
+  nameRU: {
     type: String,
     required: true,
   },
-  nameEu: {
+  nameEN: {
     type: String,
     required: true,
   },
