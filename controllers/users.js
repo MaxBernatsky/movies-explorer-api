@@ -29,11 +29,11 @@ const updateUser = (req, res, next) => {
       runValidators: true,
     },
   )
-    .then((updatedUser) => {
-      if (!updatedUser) {
+    .then((user) => {
+      if (!user) {
         throw new NotFoundError('Пользователь не найден');
       }
-      res.send(updatedUser);
+      return res.send(user);
     })
     .catch((error) => {
       if (error.name === 'ValidationError') {
@@ -58,6 +58,7 @@ const createUser = (req, res, next) => {
       res.status(CREATED).send({
         name: user.name,
         email: user.email,
+        _id: user._id,
       });
     })
     .catch((error) => {
@@ -79,7 +80,7 @@ const createUser = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
-  User.findUserByCredentials(email, password)
+  return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
