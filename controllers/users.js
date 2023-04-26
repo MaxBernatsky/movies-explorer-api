@@ -36,14 +36,19 @@ const updateUser = (req, res, next) => {
       return res.send(user);
     })
     .catch((error) => {
+      if (error.code === 11000) {
+        next(new ConflictError('Пользователь уже зарегистрирован на сайте'));
+        return;
+      }
       if (error.name === 'ValidationError') {
-        return next(
+        next(
           new BadRequestError(
             'Переданы некорректные данные при обновлении профиля',
           ),
         );
+        return;
       }
-      return next(error);
+      next(error);
     });
 };
 
