@@ -7,7 +7,10 @@ const ForbiddenError = require('../errors/ForbiddenError');
 const getMovies = (req, res, next) => {
   Movie.find({ owner: req.user._id })
     .then((movie) => {
-      res.send(movie);
+      if (!movie) {
+        throw new NotFoundError('Фильм не найден');
+      }
+      return res.send(movie);
     })
     .catch(next);
 };
