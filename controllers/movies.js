@@ -69,7 +69,8 @@ const deleteMovie = (req, res, next) => {
       }
       movie
         .deleteOne()
-        .then(() => res.status(200).send({ message: 'Фильм успешно удалён' }));
+        .then(() => res.status(200).send({ message: 'Фильм успешно удалён' }))
+        .catch((error) => next(error));
     })
     .catch((error) => {
       if (error.name === 'CastError') {
